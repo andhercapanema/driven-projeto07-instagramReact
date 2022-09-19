@@ -427,6 +427,10 @@ video {
     color: #8e8e8e;
 }
 
+.c-side-bar__user p ion-icon {
+    margin-left: 5px;
+}
+
 .c-side-bar__sugestions-header {
     justify-content: space-between;
     font-weight: 500;
@@ -511,7 +515,8 @@ strong,
 .c-post__show-comments p,
 .c-post .c-post__time,
 .c-side-bar img,
-.c-side-bar__user p,
+.c-side-bar__user p strong,
+.c-side-bar__user p ion-icon,
 .c-side-bar__sugestions-header p:last-child,
 .c-side-bar__sugestion button,
 .c-side-bar__info:first-of-type {
