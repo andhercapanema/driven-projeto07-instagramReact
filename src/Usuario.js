@@ -3,6 +3,13 @@ import React, { useState } from "react";
 function Usuario(props) {
     const [username, setUsername] = useState(props.user.username);
     const [nickname, setNickname] = useState(props.user.nickname);
+    const [profileImg, setProfileImg] = useState(
+        "./img/profile-pictures/catanacomics.svg"
+    );
+
+    function changeProfileImg() {
+        setProfileImg(prompt("Insira o link da sua nova foto de perfil:"));
+    }
 
     function changeUser(username, nickname) {
         setUsername(prompt("Insira seu novo nome de usuário:"));
@@ -13,8 +20,9 @@ function Usuario(props) {
         <>
             <div class="c-side-bar__user">
                 <img
-                    src="./img/profile-pictures/catanacomics.svg"
+                    src={profileImg}
                     alt="Sua foto de perfil"
+                    onClick={changeProfileImg}
                 />
                 <p>
                     <strong>

@@ -414,6 +414,10 @@ video {
 
 .c-side-bar__user img {
     margin-right: 17px;
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    object-fit: cover;
 }
 
 .c-side-bar__user p,
