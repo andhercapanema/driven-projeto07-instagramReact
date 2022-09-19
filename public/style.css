@@ -281,6 +281,14 @@ video {
     margin: 0 15px;
 }
 
+.liked {
+    color: #ed4956;
+}
+
+.c-post__reaction .liked:hover {
+    filter: none;
+}
+
 /* ------------------------- */
 
 .c-post__likes {

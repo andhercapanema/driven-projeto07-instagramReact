@@ -1,29 +1,5 @@
 import React, { useState } from "react";
 
-function Media(props) {
-    const {
-        media: { type, src: mediaSrc, alt: mediaAlt },
-    } = props;
-
-    if (type === "img") {
-        return (
-            <img
-                src={`./img/feed/${mediaSrc}`}
-                alt={mediaAlt}
-                class="c-post__media"
-            />
-        );
-    } else if (type === "video") {
-        return (
-            <video autoPlay muted loop>
-                <source src={`./img/feed/${mediaSrc}.mp4`} type="video/mp4" />
-                <source src={`./img/feed/${mediaSrc}.ogg`} type="video/ogg" />
-                {mediaAlt}
-            </video>
-        );
-    }
-}
-
 function Comment(props) {
     const { name, text } = props;
 
@@ -42,11 +18,7 @@ function Post(props) {
     const {
         user: { name: userName, profileImgSrc: userImg },
         media,
-        likes: {
-            profileImgSrc: likesImg,
-            profileName: likesName,
-            amount: likesAmount,
-        },
+        likes: { profileImgSrc: likesImg, profileName: likesName },
         caption,
         commentsAmount,
         comments,
@@ -54,6 +26,56 @@ function Post(props) {
     } = props;
 
     const [saved, setSaved] = useState(false);
+    const [liked, setLiked] = useState(false);
+    const [likesAmount, setLikesAmount] = useState(props.likes.amount);
+
+    function Media(props) {
+        const {
+            media: { type, src: mediaSrc, alt: mediaAlt },
+        } = props;
+
+        function addLikePost() {
+            if (!liked) {
+                setLiked(true);
+                setLikesAmount(likesAmount + 1);
+            }
+        }
+
+        if (type === "img") {
+            return (
+                <img
+                    src={`./img/feed/${mediaSrc}`}
+                    alt={mediaAlt}
+                    class="c-post__media"
+                    onDoubleClick={addLikePost}
+                />
+            );
+        } else if (type === "video") {
+            return (
+                <video autoPlay muted loop onDoubleClick={addLikePost}>
+                    <source
+                        src={`./img/feed/${mediaSrc}.mp4`}
+                        type="video/mp4"
+                    />
+                    <source
+                        src={`./img/feed/${mediaSrc}.ogg`}
+                        type="video/ogg"
+                    />
+                    {mediaAlt}
+                </video>
+            );
+        }
+    }
+
+    function toggleLikePost() {
+        if (liked) {
+            setLiked(false);
+            setLikesAmount(likesAmount - 1);
+        } else {
+            setLiked(true);
+            setLikesAmount(likesAmount + 1);
+        }
+    }
 
     return (
         <div class="c-post">
@@ -70,7 +92,11 @@ function Post(props) {
             <Media media={media} />
             <div class="c-post__reaction">
                 <div>
-                    <ion-icon name="heart-outline"></ion-icon>
+                    <ion-icon
+                        name={liked ? "heart" : "heart-outline"}
+                        class={liked ? "md hydrated liked" : "md hydrated"}
+                        onClick={toggleLikePost}
+                    ></ion-icon>
                     <ion-icon name="chatbubble-outline"></ion-icon>
                     <ion-icon name="paper-plane-outline"></ion-icon>
                 </div>
