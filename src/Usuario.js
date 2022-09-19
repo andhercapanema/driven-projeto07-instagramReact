@@ -1,9 +1,13 @@
-import React from "react";
+import React, { useState } from "react";
 
 function Usuario(props) {
-    const {
-        user: { username, nickname },
-    } = props;
+    const [username, setUsername] = useState(props.user.username);
+    const [nickname, setNickname] = useState(props.user.nickname);
+
+    function changeUser(username, nickname) {
+        setUsername(prompt("Insira seu novo nome de usuário:"));
+        setNickname(prompt("Insira seu novo nome de exibição:"));
+    }
 
     return (
         <>
@@ -18,7 +22,10 @@ function Usuario(props) {
                         <br />
                     </strong>
                     {nickname}
-                    <ion-icon name="create-outline"></ion-icon>
+                    <ion-icon
+                        name="create-outline"
+                        onClick={() => changeUser(username, nickname)}
+                    ></ion-icon>
                 </p>
             </div>
         </>
