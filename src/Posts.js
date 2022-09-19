@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 
 function Media(props) {
     const {
@@ -53,6 +53,8 @@ function Post(props) {
         time,
     } = props;
 
+    const [saved, setSaved] = useState(false);
+
     return (
         <div class="c-post">
             <div class="c-post__top">
@@ -72,7 +74,10 @@ function Post(props) {
                     <ion-icon name="chatbubble-outline"></ion-icon>
                     <ion-icon name="paper-plane-outline"></ion-icon>
                 </div>
-                <ion-icon name="bookmark-outline"></ion-icon>
+                <ion-icon
+                    name={saved ? "bookmark" : "bookmark-outline"}
+                    onClick={() => (saved ? setSaved(false) : setSaved(true))}
+                ></ion-icon>
             </div>
             <div class="c-post__likes">
                 <img
