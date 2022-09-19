@@ -1,6 +1,10 @@
 import React from "react";
 
-function Usuario() {
+function Usuario(props) {
+    const {
+        user: { username, nickname },
+    } = props;
+
     return (
         <>
             <div class="c-side-bar__user">
@@ -10,10 +14,10 @@ function Usuario() {
                 />
                 <p>
                     <strong>
-                        catanacomics
+                        {username}
                         <br />
                     </strong>
-                    Catana
+                    {nickname}
                     <ion-icon name="create-outline"></ion-icon>
                 </p>
             </div>

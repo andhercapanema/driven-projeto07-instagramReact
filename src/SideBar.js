@@ -3,10 +3,15 @@ import Sugestoes from "./Sugestoes";
 import Usuario from "./Usuario";
 
 function SideBar() {
+    const user = {
+        username: "catanacomics",
+        nickname: "Catana",
+    };
+
     return (
         <>
             <aside class="c-side-bar">
-                <Usuario />
+                <Usuario user={user} />
                 <Sugestoes />
                 <p class="c-side-bar__info">
                     Sobre • Ajuda • Imprensa • API • Carreiras • Privacidade •
